@@ -1,6 +1,5 @@
 const { Pool, Client } = require('pg');
 const fs = require('fs');
-const path = require('path');
 
 const pool = new Pool({
   user: 'postgres',
@@ -13,7 +12,7 @@ const pool = new Pool({
   try {
     const dbName = 'shopping_db';
 
-    // Vérifiez si la base de données existe
+    // Ici c'est pour vérifier si la base de donnée existe 
     const checkDB = await pool.query('SELECT 1 FROM pg_database WHERE datname = $1', [dbName]);
 
     if (checkDB.rowCount === 0) {
@@ -23,7 +22,7 @@ const pool = new Pool({
       console.log('DATABASE ALREADY EXISTS');
     }
 
-    // Connectez-vous à la base
+    // Ici c'est pour se connecter à la base de donnée
     const client = new Client({
       user: 'postgres',
       password: 'phgh206',
@@ -34,7 +33,7 @@ const pool = new Pool({
 
     await client.connect();
 
-    // Chargez et exécutez le fichier init.sql
+    // Ici vu que le fichier init.sql est dans un autre dossier il va falloir le charger et l'exécuter
     const initSQLPath = "/Users/ghp/projet_devops-1/DB/init.sql";
     if (!fs.existsSync(initSQLPath)) {
       throw new Error(`Fichier introuvable : ${initSQLPath}`);
@@ -42,11 +41,11 @@ const pool = new Pool({
 
     const initSQL = fs.readFileSync(initSQLPath, 'utf8');
     await client.query(initSQL);
-    console.log('Tables created and data inserted.');
+    console.log('Tables créées et les données ont été insérées.');
 
     await client.end();
   } catch (err) {
-    console.error('Error initializing database:', err.message);
+    console.error('Erreur lors de l'/'initialisation de la base de donnée:', err.message);
   } finally {
     await pool.end();
   }
