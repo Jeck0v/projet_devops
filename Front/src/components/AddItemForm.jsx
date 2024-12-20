@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 const AddItemForm = ({ onAddItem }) => {
   const [name, setName] = useState(''); // Track the name of the item
   const [quantity, setQuantity] = useState(1); // Track the quantity
+  const [error, setError] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();

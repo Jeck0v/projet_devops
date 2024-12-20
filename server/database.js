@@ -34,7 +34,7 @@ const pool = new Pool({
     await client.connect();
 
     // Ici vu que le fichier init.sql est dans un autre dossier il va falloir le charger et l'exécuter
-    const initSQLPath = "/Users/ghp/projet_devops-1/DB/init.sql";
+    const initSQLPath = "../DB/init.sql";
     if (!fs.existsSync(initSQLPath)) {
       throw new Error(`Fichier introuvable : ${initSQLPath}`);
     }
