@@ -17,9 +17,9 @@ const pool = new Pool({
 
     if (checkDB.rowCount === 0) {
       await pool.query(`CREATE DATABASE ${dbName}`);
-      console.log('DATABASE CREATED');
+      console.log('La base de donnée a été créée.');
     } else {
-      console.log('DATABASE ALREADY EXISTS');
+      console.log('La base de donnée existe déjà');
     }
 
     // Ici c'est pour se connecter à la base de donnée
